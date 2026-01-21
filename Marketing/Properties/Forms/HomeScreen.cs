@@ -25,7 +25,29 @@ namespace Marketing
             dataGridView1.DataSource = dt;
         }
 
-        
+        private void button_advanced_search_Click(object sender, EventArgs e) // Расширенный поиск
+        {
+            AdvancedSearchForm searchForm = new AdvancedSearchForm();
+            searchForm.Show();
+        }
+
+        private void button_search_Click(object sender, EventArgs e) // Поиск по кнопке "Поиск"
+        {
+            SearchContent(searchHomeScreen.Text);
+        }
+
+        private void SearchContent(string searchText) // Метод поиска по всем столбцам
+        {
+            try
+            {
+                DataTable dt = DatabaseHelper.SearchContent(searchText);
+                dataGridView1.DataSource = dt;
+            }
+            catch
+            {
+
+            }
+        }
 
         private void button1_Click(object sender, EventArgs e) // Добавление новой записи
         {
