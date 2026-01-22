@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Marketing.Properties.Сlasses;
+using System.Data;
 using TEST.Properties.Сlasses;
 
 namespace Marketing
@@ -35,6 +36,35 @@ namespace Marketing
 
         private void buttonSave_Click_1(object sender, EventArgs e)
         {
+            // Проверка на пустые поля
+            var validator = new ContentFormValidator();
+
+            bool isValid = validator.Validate(
+                TitleAdd.Text,
+                DescriptionAdd.Text,
+                VieswsAdd.Text,
+
+                AuthorAdd.Text,
+                AuthorAdd.SelectedItem != null,
+
+                TypeAdd.Text,
+                TypeAdd.SelectedItem != null,
+
+                PlatformAdd.Text,
+                PlatformAdd.SelectedItem != null
+            );
+
+            if (!isValid)
+            {
+                MessageBox.Show(
+                    "Чтобы сохранить изменения, заполните все поля",
+                    "Ошибка",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning
+                );
+                return;
+            }
+
             ContentUpdater updater = new ContentUpdater();
 
             updater.Update(
